@@ -1,5 +1,6 @@
 import {useCallback, useState} from 'react';
 import {useDropzone} from 'react-dropzone';
+import {formatSize} from "~/lib/utils";
 
 interface FileUploaderProps {
     onFileSelect?: (file: File | null) => void;
@@ -13,11 +14,13 @@ const FileUploader = ({ onFileSelect }: FileUploaderProps) => {
         onFileSelect?.(file);
     }, [onFileSelect])
 
+    const maxFileSize = 20 * 1024 * 1024; // 20MB in bytes
+
     const {getRootProps, getInputProps, isDragActive, acceptedFiles} = useDropzone({
         onDrop,
         multiple: false,
         accept: {'application/pdf': ['.pdf']},
-        maxSize: 20 * 1024 * 1024,
+        maxSize: maxFileSize
     });
 
     const file = acceptedFiles[0] || null;
@@ -37,7 +40,7 @@ const FileUploader = ({ onFileSelect }: FileUploaderProps) => {
                                         {file.name}
                                     </p>
                                     <p className="text-sm text-gray-500">
-                                        {}
+                                        {formatSize(file.size)}
                                     </p>
                                 </div>
                             </div>
@@ -57,7 +60,7 @@ const FileUploader = ({ onFileSelect }: FileUploaderProps) => {
                                 Click to upload
                             </span> or drag and drop
                         </p>
-                        <p className="text-lg text-gray-500">PDF (max 20 mb)</p>
+                        <p className="text-lg text-gray-500">PDF (max {formatSize(maxFileSize)})</p>
                       </div>
                     )}
                 </div>
