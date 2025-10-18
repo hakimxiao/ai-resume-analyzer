@@ -94,3 +94,7 @@ Gunakan import type { ... } dari /types/puter.d.ts untuk menjaga performa build 
 Saat menambahkan fungsi baru di puter.ts, pastikan selalu menambahkan tipe hasil di puter.d.ts.
 
 Gunakan devtools dari Zustand untuk debugging state global.
+
+
+## MY PUTER DOMAIN : 
+-- https://puter.com/app/jsm-ai-resume-analyzer-50
